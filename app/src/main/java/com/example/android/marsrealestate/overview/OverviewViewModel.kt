@@ -20,6 +20,7 @@ package com.example.android.marsrealestate.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android.marsrealestate.network.MarsApiService
 
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
