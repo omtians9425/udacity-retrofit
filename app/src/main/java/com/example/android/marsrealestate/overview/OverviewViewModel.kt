@@ -71,7 +71,6 @@ class OverviewViewModel : ViewModel() {
                 if (listResult.isNotEmpty()) {
                     _property.value = listResult.first()
                 }
-                _status.value = "Success: ${listResult.size} Mars properties retrieved"
             } catch (t: Throwable) {
                 _status.value = "Failure " + t.message
             }
