@@ -39,9 +39,9 @@ class OverviewViewModel : ViewModel() {
     val status: LiveData<String>
         get() = _status
 
-    private val _property = MutableLiveData<List<MarsProperty>>()
-    val property: LiveData<List<MarsProperty>>
-        get() = _property
+    private val _properties = MutableLiveData<List<MarsProperty>>()
+    val properties: LiveData<List<MarsProperty>>
+        get() = _properties
 
     // create Job
     private var viewModelJob = Job()
@@ -64,12 +64,13 @@ class OverviewViewModel : ViewModel() {
      * Sets the value of the status LiveData to the Mars API status.
      */
     private fun getMarsRealEstateProperties() {
+        // This follows structured concurrency.
         coroutineScope.launch {
             val getPropertiesDeferred = MarsApi.retrofitService.getPropertiesDeferred()
             try {
                 val listResult = getPropertiesDeferred.await()
                 if (listResult.isNotEmpty()) {
-                    _property.value = listResult
+                    _properties.value = listResult
                 }
             } catch (t: Throwable) {
                 _status.value = "Failure " + t.message
