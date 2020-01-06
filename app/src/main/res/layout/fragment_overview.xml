@@ -44,6 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:clipToPadding="false"
             app:spanCount="2"
             tools:itemCount="16"
             tools:listitem="@layout/grid_view_item"/>
