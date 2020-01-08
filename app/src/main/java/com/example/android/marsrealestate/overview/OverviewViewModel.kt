@@ -27,7 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-enum class MarsApiStatus {LOADING, ERROR, DONE}
+enum class MarsApiStatus { LOADING, ERROR, DONE }
 
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
@@ -44,6 +44,10 @@ class OverviewViewModel : ViewModel() {
     private val _properties = MutableLiveData<List<MarsProperty>>()
     val properties: LiveData<List<MarsProperty>>
         get() = _properties
+
+    private val _navigateToSelectedProperty = MutableLiveData<MarsProperty>()
+    val navigateToSelectedProperty: LiveData<MarsProperty>
+        get() = _navigateToSelectedProperty
 
     // create Job
     private var viewModelJob = Job()
@@ -91,5 +95,14 @@ class OverviewViewModel : ViewModel() {
 //                _response.value = "Success: ${response.body()?.size} Mars properties retrieved"
 //            }
 //        })
+    }
+
+    fun navigateToDetail(selectedProperty: MarsProperty) {
+        _navigateToSelectedProperty.value = selectedProperty
+    }
+
+    // clear to use LiveData as Event
+    fun navigateToDetailDone() {
+        _navigateToSelectedProperty.value = null
     }
 }
