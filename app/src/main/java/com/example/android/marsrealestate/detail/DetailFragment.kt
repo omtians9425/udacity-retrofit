@@ -29,17 +29,18 @@ import com.example.android.marsrealestate.databinding.FragmentDetailBinding
  */
 class DetailFragment : Fragment() {
 
-    private val viewModel: DetailViewModel by lazy {
-        ViewModelProviders.of(this).get(DetailViewModel::class.java)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         @Suppress("UNUSED_VARIABLE")
         val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)
+
+        val marsProperty = DetailFragmentArgs.fromBundle(arguments!!).marsProperty
+
+        val viewModelFactory = DetailViewModelFactory(marsProperty, application)
+
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding.viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
         return binding.root
     }
 }
